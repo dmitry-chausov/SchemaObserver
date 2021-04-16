@@ -1,0 +1,50 @@
+<template>
+  <template if:true={sObjectDescription.data}>
+    <h2>SObject Information: </h2>
+    <lightning-layout>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        <template if:true={sObjectDescription.data.iconPath}>
+          <lightning-icon icon-name={sObjectDescription.data.iconPath} size="small"></lightning-icon>
+        </template>
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        Label: {sObjectDescription.data.label}
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        API Name: {sObjectDescription.data.apiName}
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        Key Prefix: {sObjectDescription.data.keyPrefix}
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        is Accessible: {sObjectDescription.data.isAccessible}
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        is Queryable: {sObjectDescription.data.isQueryable}
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        is Custom: {sObjectDescription.data.isCustom}
+      </lightning-layout-item>
+      <lightning-layout-item flexibility="auto" padding="around-small">
+        is Updatable: {sObjectDescription.data.isUpdatable}
+      </lightning-layout-item>
+    </lightning-layout>
+    <hr/>
+    <br/>
+    <h2>Fields Information: </h2>
+    <lightning-layout multiple-rows>
+      <template for:each={sObjectDescription.data.fieldDescribeList} for:item="field">
+        <lightning-layout-item size="3" key={field.name} padding="around-small">
+          <div>Name: {field.name}</div>
+          <div>Label: {field.label}</div>
+          <div>is Accessible: {field.isAccessible}</div>
+          <div>is Compound: {field.isCompound}</div>
+          <div>is Lookup: {field.isLookup}</div>
+          <template if:true={field.relationshipName}>
+            <div>Relationship Name: {field.relationshipName}</div>
+          </template>
+        </lightning-layout-item>
+      </template>
+    </lightning-layout>
+  </template>
+</template>
